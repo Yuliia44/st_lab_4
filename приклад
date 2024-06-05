@@ -1,0 +1,83 @@
+using System;
+using System.Text;
+
+namespace CityApp
+{
+    class Town
+    {
+        public string Name { get; set; }
+        public string Country { get; set; }
+        public string Region { get; set; }
+        public int Population { get; set; }
+        public double YearIncome { get; set; }
+        public double Square { get; set; }
+        public bool HasPort { get; set; }
+        public bool HasAirport { get; set; }
+
+        public double GetYearIncomePerInhabitant()
+        {
+            return YearIncome / Population;
+        }
+    }
+
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.OutputEncoding = Encoding.UTF8;
+
+            Console.Write("Введiть назву мiста: ");
+            string sName = Console.ReadLine();
+
+            Console.Write("Введiть назву краiни: ");
+            string sCountry = Console.ReadLine();
+
+            Console.Write("Введiть назву регiону: ");
+            string sRegion = Console.ReadLine();
+
+            Console.Write("Введiть кiлькiсть населення: ");
+            string sPopulation = Console.ReadLine();
+
+            Console.Write("Введiть рiчний дохiд: ");
+            string sYearIncome = Console.ReadLine();
+
+            Console.Write("Введiть площу, кв. км: ");
+            string sSquare = Console.ReadLine();
+
+            Console.Write("Чи є у мiстi порт? (y/n): ");
+            ConsoleKeyInfo keyHasPort = Console.ReadKey();
+            Console.WriteLine();
+
+            Console.Write("Чи є у мiстi аеропорт? (y/n): ");
+            ConsoleKeyInfo keyHasAirport = Console.ReadKey();
+            Console.WriteLine();
+
+            Town OurTown = new Town();
+
+            OurTown.Name = sName;
+            OurTown.Country = sCountry;
+            OurTown.Region = sRegion;
+            OurTown.Population = int.Parse(sPopulation);
+            OurTown.YearIncome = double.Parse(sYearIncome);
+            OurTown.Square = double.Parse(sSquare);
+            OurTown.HasPort = keyHasPort.Key == ConsoleKey.Y ? true : false;
+            OurTown.HasAirport = keyHasAirport.Key == ConsoleKey.Y ? true : false;
+
+            double YearIncomePerInhabitant = OurTown.GetYearIncomePerInhabitant();
+            Console.WriteLine();
+            Console.WriteLine("Данi про об`ект:");
+            Console.WriteLine("Назва: " + OurTown.Name);
+            Console.WriteLine("Країна: " + OurTown.Country);
+            Console.WriteLine("Регiон: " + OurTown.Region);
+            Console.WriteLine("Кiлькiсть населення: " + OurTown.Population);
+            Console.WriteLine("Рiчний дохiд: " + OurTown.YearIncome.ToString("0.00"));
+            Console.WriteLine("Площа: " + OurTown.Square.ToString("0.000"));
+            Console.WriteLine(OurTown.HasPort ? "У мiстi є порт" : "У мiстi нема порту");
+            Console.WriteLine(OurTown.HasAirport ? "У мiстi є аеропорт" : "У мiстi нема аеропорту");
+            Console.WriteLine();
+            Console.WriteLine("Середнiй рiчний дохiд на одного громадянина: " + YearIncomePerInhabitant.ToString("0.00"));
+
+            Console.ReadKey();
+        }
+    }
+}
